@@ -7,7 +7,7 @@
 </head>
 <body>
 
-<h2>Curso</h2>
+<h2>incrustar</h2>
 
 <?php  echo "lubutech" ?>
 <?php 
