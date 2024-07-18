@@ -16,11 +16,11 @@ function redirect(event) {
         });
         return;
     }
-    if (clave.length > 7) {
+    if (clave.length > 10 || clave.length < 7) {
         Swal.fire({
             icon: 'warning',
             title: 'Advertencia',
-            text: 'La contraseña debe tener máximo 7 caracteres.',
+            text: 'La contraseña debe tener minimo 7 caracteres y máximo 10 caracteres.',
         });
         return;
     }
