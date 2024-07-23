@@ -1,3 +1,4 @@
+
 function redirect(event) {
     event.preventDefault(); 
     var tipoDocumento = document.getElementById('lang').value;
@@ -8,6 +9,7 @@ function redirect(event) {
     var usuario = document.getElementById('usuario').value.trim();
     var clave = document.getElementById('clave').value.trim();
     var confirmacionClave = document.getElementById('confirmacion_clave').value.trim();
+    
     if (!tipoDocumento || !identificacion || !nombres || !apellidos || !correo || !usuario || !clave || !confirmacionClave) {
         Swal.fire({
             icon: 'error',
@@ -16,14 +18,25 @@ function redirect(event) {
         });
         return;
     }
+    
     if (clave.length > 10 || clave.length < 7) {
         Swal.fire({
             icon: 'warning',
             title: 'Advertencia',
-            text: 'La contraseña debe tener minimo 7 caracteres y máximo 10 caracteres.',
+            text: 'La contraseña debe tener mínimo 7 caracteres y máximo 10 caracteres.',
         });
         return;
     }
+    
+    if (!(/^[a-zA-Z]+$/.test(clave))) {
+        Swal.fire({
+            icon: 'warning',
+            title: 'Advertencia',
+            text: 'La contraseña debe contener solo letras (sin espacios ni caracteres especiales).',
+        });
+        return;
+    }
+    
     if (clave !== confirmacionClave) {
         Swal.fire({
             icon: 'error',
@@ -32,16 +45,19 @@ function redirect(event) {
         });
         return;
     }
+
     if (!document.getElementById('checkbox').checked) {
         Swal.fire({
-            icon: 'error',
-            title: 'Error',
+            icon: 'warning',
+            title: 'Advertencia',
             text: 'Debe aceptar los términos y condiciones',
         });
         return;
     }
+  
     localStorage.setItem('nombres', nombres);
     localStorage.setItem('apellidos', apellidos);
+    
     Swal.fire({
         icon: 'success',
         title: '¡Bienvenido!',
